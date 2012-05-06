@@ -1,0 +1,42 @@
+deflogin on
+
+vbell on
+vbell_msg " Woop Woop!  "
+
+defscrollback 1024
+
+# Remove dangerous bindings
+bind ^k
+bind ^\
+# Add better bindings
+bind \\ quit
+bind K kill
+bind I login on
+bind O login off
+bind } history
+escape ^Jj
+
+# TERM Settings
+termcapinfo vt100 dl=5\E[M
+
+# turn sending of screen messages to hardstatus off
+hardstatus off
+# Set the hardstatus prop on gui terms to set the titlebar/icon title
+termcapinfo xterm*|rxvt*|kterm*|Eterm* hs:ts=\E]0;:fs=\007:ds=\E]0;\007
+# use this for the hard status string
+hardstatus string "%h%? users: %u%?"
+
+caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= @%H - %LD %d %LM - %c"
+
+# set these terminals up to be 'optimal' instead of vt100
+termcapinfo xterm*|linux*|rxvt*|Eterm* OP
+
+bind = resize =
+bind + resize +1
+bind - resize -1
+bind _ resize max
+
+termcapinfo xterm 'is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l'
+
+# Enable non-blocking mode to better cope with flaky ssh connections.
+defnonblock 5
